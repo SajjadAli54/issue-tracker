@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { TextField, Button, Callout, Text } from "@radix-ui/themes";
+import { TextField, Button, Callout } from "@radix-ui/themes";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
@@ -10,8 +10,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
+import { createIssueSchema } from "@/app/validationSchemas";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 
@@ -29,15 +29,16 @@ const NewIssuePage = () => {
 
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   async function onSubmit(data: IssueForm) {
     try {
       setIsSubmitting(true);
       const response = await axios.post("/api/issues", data);
-      const router = useRouter();
-      router.push(`/issues/`);
+      router.push(`/issues`);
+      setError("");
     } catch (error) {
-      setError("An error occurred while creating the issue");
+      setError("An error occurred while creating the issue " + error);
     }
     setIsSubmitting(false);
   }
