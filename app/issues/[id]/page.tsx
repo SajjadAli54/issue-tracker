@@ -14,7 +14,7 @@ interface IssueDetailPageProps {
 }
 
 const IssueDetailPage = async ({ params }: IssueDetailPageProps) => {
-  //   delay(3000);
+  // await delay(3000);
   const id = params.id;
   //   if (typeof id != "number") notFound();
 

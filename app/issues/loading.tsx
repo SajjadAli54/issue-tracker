@@ -1,6 +1,5 @@
 import { Table } from "@radix-ui/themes";
 import React from "react";
-import IssueStatusBadge from "../components/IssueStatusBadge";
 
 import { Skeleton } from "@radix-ui/themes";
 import "react-loading-skeleton/dist/skeleton.css";
