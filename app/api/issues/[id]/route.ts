@@ -5,17 +5,16 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PATCH(
   request: NextRequest,
   {
-    params: { params },
+    params,
   }: {
     params: {
-      params: {
-        id: string;
-      };
+      id: string;
     };
   }
 ) {
   const json = await request.json();
-  const { id } = params;
+  let { id: idStr } = params;
+  const id = parseInt(idStr);
   const validation = await issueSchema.safeParse(json);
 
   if (!validation.success) {
@@ -27,7 +26,7 @@ export async function PATCH(
 
   const issue = await prisma.issue.findUnique({
     where: {
-      id: parseInt(id),
+      id: id,
     },
   });
 
@@ -37,7 +36,7 @@ export async function PATCH(
 
   const updatedIssue = await prisma.issue.update({
     where: {
-      id: issue.id,
+      id: id,
     },
     data: {
       title: json.title,
