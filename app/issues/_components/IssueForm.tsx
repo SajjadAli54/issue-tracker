@@ -6,19 +6,15 @@ import { useState } from "react";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 import { Controller, useForm } from "react-hook-form";
+import SimpleMDE from "react-simplemde-editor";
 
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Issue } from "@prisma/client";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+import { z } from "zod";
 
 type IssueType = z.infer<typeof issueSchema>;
 
