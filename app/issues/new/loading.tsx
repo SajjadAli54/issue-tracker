@@ -1,5 +1,5 @@
-import { Skeleton, Box } from "@radix-ui/themes";
-import "react-loading-skeleton/dist/skeleton.css";
+import { Skeleton } from "@/app/components";
+import { Box } from "@radix-ui/themes";
 
 const LoadingNewIssueMessage = () => {
   return (
