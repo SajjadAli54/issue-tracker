@@ -5,6 +5,8 @@ import delay from "delay";
 import { notFound } from "next/navigation";
 import React from "react";
 
+import ReactMarkDown from "react-markdown";
+
 interface IssueDetailPageProps {
   params: {
     id: string;
@@ -31,7 +33,9 @@ const IssueDetailPage = async ({ params }: IssueDetailPageProps) => {
         <IssueStatusBadge status={issue.status} />
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
-      <Card>{issue.description}</Card>
+      <Card className="prose" mt="5">
+        <ReactMarkDown>{issue.description}</ReactMarkDown>
+      </Card>
     </div>
   );
 };
