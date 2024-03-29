@@ -2,10 +2,7 @@ import { Pencil2Icon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
 import Link from "next/link";
 
-interface Props {
-  id: string;
-}
-const EditIssueButton = ({ id }: Props) => {
+const EditIssueButton = ({ id }: { id: string }) => {
   return (
     <Button>
       <Pencil2Icon />
