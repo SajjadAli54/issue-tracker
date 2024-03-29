@@ -1,20 +1,17 @@
 import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { parse } from "path";
 
-export async function PATCH(
-  request: NextRequest,
-  {
-    params,
-  }: {
-    params: {
-      id: string;
-    };
-  }
-) {
+interface Params {
+  params: {
+    id: string;
+  };
+}
+
+export async function PATCH(request: NextRequest, { params }: Params) {
   const json = await request.json();
-  let { id: idStr } = params;
-  const id = parseInt(idStr);
+  const id = parseInt(params.id);
   const validation = await issueSchema.safeParse(json);
 
   if (!validation.success) {
@@ -45,4 +42,25 @@ export async function PATCH(
   });
 
   return NextResponse.json(updatedIssue);
+}
+
+export async function DELETE(request: NextRequest, { params }: Params) {
+  const id = parseInt(params.id);
+  const issue = await prisma.issue.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  if (!issue) {
+    return NextResponse.json({ errors: "Issue not found" }, { status: 404 });
+  }
+
+  await prisma.issue.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return NextResponse.json({}, { status: 204 });
 }
