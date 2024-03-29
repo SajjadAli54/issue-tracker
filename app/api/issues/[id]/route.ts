@@ -1,7 +1,6 @@
 import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { parse } from "path";
 
 interface Params {
   params: {
@@ -62,5 +61,5 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     },
   });
 
-  return NextResponse.json({}, { status: 204 });
+  return NextResponse.json({}, { status: 200 });
 }
